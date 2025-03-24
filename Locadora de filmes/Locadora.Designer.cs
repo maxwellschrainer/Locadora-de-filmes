@@ -46,6 +46,7 @@
             this.locBase.Name = "locBase";
             this.locBase.Size = new System.Drawing.Size(800, 426);
             this.locBase.TabIndex = 0;
+            this.locBase.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.locBase_CellContentClick);
             // 
             // Header
             // 
@@ -59,6 +60,7 @@
             this.Header.Size = new System.Drawing.Size(800, 24);
             this.Header.TabIndex = 1;
             this.Header.Text = "menuStrip1";
+            this.Header.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.Header_ItemClicked);
             // 
             // locNovoFilme
             // 
@@ -97,7 +99,8 @@
             this.Controls.Add(this.Header);
             this.MainMenuStrip = this.Header;
             this.Name = "locMain";
-            this.Text = "Form1";
+            this.Text = "Locadora de Filmes";
+            this.Load += new System.EventHandler(this.locMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.locBase)).EndInit();
             this.Header.ResumeLayout(false);
             this.Header.PerformLayout();
