@@ -22,6 +22,8 @@ namespace Locadora_de_filmes
         #region Inserir Filmes
         private void locNovoFilme_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("Preencha os dados de data desta forma: xx/xx/xxxx e a duração desta forma: xx:xx:xx", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             dt = new DataTable();
             dt.TableName = "Tabela";
 
@@ -31,8 +33,15 @@ namespace Locadora_de_filmes
             dt.Columns.Add("Data de lançamento", typeof(DateTime));
             dt.Columns.Add("Duração", typeof(TimeSpan));
             dt.Columns.Add("Avaliação", typeof(double));
+            dt.Columns.Add("Situação", typeof(string));
+            dt.Columns.Add("Nome cliente", typeof(string));
+            dt.Columns.Add("Telefone cliente", typeof(string));
+            dt.Columns.Add("CPF cliente", typeof(string));
+            dt.Columns.Add("Data para devolução", typeof(DateTime));
 
             locBase.DataSource = dt;
+
+            locBase.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
         #endregion
 
@@ -94,10 +103,6 @@ namespace Locadora_de_filmes
             if (fecharSistema == DialogResult.Yes)
             {
                 this.Close();
-            }
-            else if (fecharSistema == DialogResult.No)
-            {
-                this.Refresh();
             }
         }
         #endregion
