@@ -37,6 +37,7 @@ namespace Locadora_de_filmes
             dt.Columns.Add("Nome cliente", typeof(string));
             dt.Columns.Add("Telefone cliente", typeof(string));
             dt.Columns.Add("CPF cliente", typeof(string));
+            dt.Columns.Add("E-Mail cliente", typeof(string));
             dt.Columns.Add("Data para devolução", typeof(DateTime));
 
             locBase.DataSource = dt;
@@ -106,5 +107,12 @@ namespace Locadora_de_filmes
             }
         }
         #endregion
-    } 
+
+        #region Mensagem de erro
+        private void locBase_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            MessageBox.Show("Dados inválidos, insira um dado válido para a célula que está em edição.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+        #endregion
+    }
 }
