@@ -25,12 +25,12 @@ namespace Locadora_de_filmes
             dt = new DataTable();
             dt.TableName = "Tabela";
 
-            dt.Columns.Add("Título:", typeof(string));
-            dt.Columns.Add("Diretor:", typeof(string));
-            dt.Columns.Add("Gênero:", typeof(string));
-            dt.Columns.Add("Data de lançamento:", typeof(DateTime));
-            dt.Columns.Add("Duração:", typeof(int));
-            dt.Columns.Add("Avaliação", typeof(float));
+            dt.Columns.Add("Título", typeof(string));
+            dt.Columns.Add("Diretor", typeof(string));
+            dt.Columns.Add("Gênero", typeof(string));
+            dt.Columns.Add("Data de lançamento", typeof(DateTime));
+            dt.Columns.Add("Duração", typeof(TimeSpan));
+            dt.Columns.Add("Avaliação", typeof(double));
 
             locBase.DataSource = dt;
         }
@@ -61,6 +61,7 @@ namespace Locadora_de_filmes
         }
         #endregion
 
+        #region Carregar Dados
         private void locCarregarDados_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog abrirArquivo = new OpenFileDialog())
@@ -84,6 +85,7 @@ namespace Locadora_de_filmes
                 }
             }
         }
+        #endregion
 
         #region Fechar o sistema.
         private void locSair_Click(object sender, EventArgs e)
