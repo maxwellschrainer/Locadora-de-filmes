@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.locBase = new System.Windows.Forms.DataGridView();
-            this.Header = new System.Windows.Forms.MenuStrip();
             this.locNovoFilme = new System.Windows.Forms.ToolStripMenuItem();
             this.locSalvarDados = new System.Windows.Forms.ToolStripMenuItem();
             this.locCarregarDados = new System.Windows.Forms.ToolStripMenuItem();
             this.locSair = new System.Windows.Forms.ToolStripMenuItem();
+            this.Header = new System.Windows.Forms.MenuStrip();
             ((System.ComponentModel.ISupportInitialize)(this.locBase)).BeginInit();
             this.Header.SuspendLayout();
             this.SuspendLayout();
@@ -46,21 +46,6 @@
             this.locBase.Name = "locBase";
             this.locBase.Size = new System.Drawing.Size(800, 426);
             this.locBase.TabIndex = 0;
-            this.locBase.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.locBase_CellContentClick);
-            // 
-            // Header
-            // 
-            this.Header.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.locNovoFilme,
-            this.locSalvarDados,
-            this.locCarregarDados,
-            this.locSair});
-            this.Header.Location = new System.Drawing.Point(0, 0);
-            this.Header.Name = "Header";
-            this.Header.Size = new System.Drawing.Size(800, 24);
-            this.Header.TabIndex = 1;
-            this.Header.Text = "menuStrip1";
-            this.Header.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.Header_ItemClicked);
             // 
             // locNovoFilme
             // 
@@ -90,6 +75,19 @@
             this.locSair.Text = "Sair";
             this.locSair.Click += new System.EventHandler(this.locSair_Click);
             // 
+            // Header
+            // 
+            this.Header.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.locNovoFilme,
+            this.locSalvarDados,
+            this.locCarregarDados,
+            this.locSair});
+            this.Header.Location = new System.Drawing.Point(0, 0);
+            this.Header.Name = "Header";
+            this.Header.Size = new System.Drawing.Size(800, 24);
+            this.Header.TabIndex = 1;
+            this.Header.Text = "menuStrip1";
+            // 
             // locMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -100,7 +98,6 @@
             this.MainMenuStrip = this.Header;
             this.Name = "locMain";
             this.Text = "Locadora de Filmes";
-            this.Load += new System.EventHandler(this.locMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.locBase)).EndInit();
             this.Header.ResumeLayout(false);
             this.Header.PerformLayout();
@@ -112,11 +109,11 @@
         #endregion
 
         private System.Windows.Forms.DataGridView locBase;
-        private System.Windows.Forms.MenuStrip Header;
         private System.Windows.Forms.ToolStripMenuItem locNovoFilme;
         private System.Windows.Forms.ToolStripMenuItem locSalvarDados;
         private System.Windows.Forms.ToolStripMenuItem locCarregarDados;
         private System.Windows.Forms.ToolStripMenuItem locSair;
+        private System.Windows.Forms.MenuStrip Header;
     }
 }
 

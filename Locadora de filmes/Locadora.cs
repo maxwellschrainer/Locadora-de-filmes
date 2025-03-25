@@ -13,7 +13,7 @@ namespace Locadora_de_filmes
 {
     public partial class locMain : Form
     {
-        private DataTable dt = new DataTable();
+        private DataTable dt;
         public locMain()
         {
             InitializeComponent();
@@ -22,7 +22,9 @@ namespace Locadora_de_filmes
         #region Inserir Filmes
         private void locNovoFilme_Click(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
+            dt = new DataTable();
+            dt.TableName = "Tabela";
+
             dt.Columns.Add("Título:", typeof(string));
             dt.Columns.Add("Diretor:", typeof(string));
             dt.Columns.Add("Gênero:", typeof(string));
@@ -37,12 +39,22 @@ namespace Locadora_de_filmes
         #region Salvar Dados
         private void locSalvarDados_Click(object sender, EventArgs e)
         {
-            if (dt.Rows.Count > 0)
+            if (dt != null && dt.Rows.Count > 0)
             {
-                dt.WriteXml("dados.xml", XmlWriteMode.WriteSchema);
-                MessageBox.Show("Dados salvos com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                using (SaveFileDialog salvarComo = new SaveFileDialog())
+                {
+                    salvarComo.Filter = "Arquivo XML (*.xml)|*.xml";
+                    salvarComo.Title = "Salvar Como";
+                    salvarComo.FileName = "dados";
+
+                    if (salvarComo.ShowDialog() == DialogResult.OK)
+                    {
+                        dt.WriteXml(salvarComo.FileName, XmlWriteMode.WriteSchema);
+                        MessageBox.Show("Dados salvos com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
             }
-            else 
+            else
             {
                 MessageBox.Show("Não há dados para salvar!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -51,13 +63,32 @@ namespace Locadora_de_filmes
 
         private void locCarregarDados_Click(object sender, EventArgs e)
         {
+            using (OpenFileDialog abrirArquivo = new OpenFileDialog())
+            {
+                abrirArquivo.Filter = "Arquivo XML (*xml)|*xml";
+                abrirArquivo.Title = "Abrir arquivo";
 
+                if (abrirArquivo.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        dt = new DataTable();
+                        dt.ReadXml(abrirArquivo.FileName);
+                        locBase.DataSource = dt;
+                        MessageBox.Show("Arquivo carregado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Erro ao carregar o arquivo: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
 
         #region Fechar o sistema.
         private void locSair_Click(object sender, EventArgs e)
         {
-            DialogResult fecharSistema = MessageBox.Show("Tem certeza que deseja fechar o sistema?", "Fechar o sistema?", MessageBoxButtons.YesNo);
+            DialogResult fecharSistema = MessageBox.Show("Tem certeza que deseja fechar o sistema?", "Fechar o sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (fecharSistema == DialogResult.Yes)
             {
                 this.Close();
@@ -68,20 +99,5 @@ namespace Locadora_de_filmes
             }
         }
         #endregion
-
-        private void locBase_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void locMain_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Header_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-    }
+    } 
 }
